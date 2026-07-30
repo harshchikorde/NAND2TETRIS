@@ -1,0 +1,14 @@
+# Local environment configuration — contains personal file paths
+.env
+
+# Python byte-compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Nand2Tetris intermediate / temp files generated during processing
+sampleparsed.txt
+token.xml
+ttoken.xml
+vm_code.vm
+*.hack

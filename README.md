@@ -4,6 +4,22 @@
 
 ---
 
+## 📂 Quick Start
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/harshchikorde/NAND2TETRIS.git
+cd NAND2TETRIS
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Configure your paths
+cp .env.example .env   # then edit .env with your file paths
+```
+
+---
+
 ## 📖 About Nand2Tetris
 
 **Nand2Tetris** (officially titled *From Nand to Tetris: Building a Modern Computer From First Principles*) is a landmark computer science course and textbook created by **[Noam Nisan](http://www.cs.huji.ac.il/~noam/)** and **[Shimon Schocken](http://www.shimonschocken.com)**.
@@ -73,19 +89,76 @@ NAND2TETRIS/
 ## ⚙️ Prerequisites
 
 - Python 3.x
-- `colorama` library (used by `comp2.py` for terminal output colouring)
+- All dependencies listed in `requirements.txt`
 
-Install dependencies:
+Install all dependencies at once:
 ```bash
-pip install colorama
+pip install -r requirements.txt
 ```
+
+### `requirements.txt` contents
+
+| Package | Version | Used by | Purpose |
+|---------|---------|---------|--------|
+| `colorama` | `>=0.4.6` | `comp2.py` | Coloured terminal output |
+| `python-dotenv` | `>=1.0.0` | All scripts | Loads `.env` config into `os.environ` |
+
+---
+
+## 🗺️ Hardcoded Paths & `.env` Configuration
+
+All scripts originally contained hardcoded Windows paths. These are now documented in the `.env` file so you can configure them in one place without touching source code.
+
+### All Hardcoded Paths Found
+
+| Variable | Default Value | File | Line | Description |
+|----------|--------------|------|------|-------------|
+| `ASM_INPUT_PATH` | `D:/nand2tetris/projects/06/max/Max.asm` | `asm.py` | 244 | Input `.asm` file for the assembler |
+| `TEMP_PARSED_FILE` | `D:/nand2tetris/projects/sampleparsed.txt` | `asm.py` | 17, 252, 263 | Temporary cleaned-up instruction file |
+| `VM_INPUT_PATH` | `D:/nand2tetris/projects/08/FunctionCalls/StaticsTest/Class2.vm` | `vm.py` | 352 | Input `.vm` file for the VM translator |
+| `TEMP_PARSED_FILE` | `D:/nand2tetris/projects/sampleparsed.txt` | `vm.py` | 360, 370 | Temporary cleaned-up instruction file |
+| `COMP_INPUT_PATH` | `D:/nand2tetris/projects/10/ExpressionLessSquare/SquareGame.jack` | `comp.py` | 1026 | Input `.jack` file for Compiler I |
+| `TEMP_PARSED_FILE` | `D:/nand2tetris/projects/sampleparsed.txt` | `comp.py` | 10, 1033 | Temporary cleaned-up source file |
+| `TEMP_TOKEN_XML` | `D:/nand2tetris/projects/token.xml` | `comp.py` | 64, 1037 | Token stream XML output |
+| `TEMP_TTOKEN_XML` | `D:/nand2tetris/projects/ttoken.xml` | `comp.py` | 130 | Final parse tree XML output |
+| `COMP2_INPUT_PATH` | `D:/nand2tetris/projects/10/ExpressionLessSquare/SquareGame.jack` | `comp2.py` | 1391 | Input `.jack` file for Compiler II |
+| `TEMP_PARSED_FILE` | `D:/nand2tetris/projects/sampleparsed.txt` | `comp2.py` | 13, 1398 | Temporary cleaned-up source file |
+| `TEMP_TOKEN_XML` | `D:/nand2tetris/projects/token.xml` | `comp2.py` | 69, 1402 | Token stream XML output |
+| `TEMP_TTOKEN_XML` | `D:/nand2tetris/projects/ttoken.xml` | `comp2.py` | 203 | Final parse tree XML output |
+| `TEMP_VM_CODE` | `D:/nand2tetris/projects/vm_code.vm` | `comp2.py` | 527 | VM code output from compiler |
+
+### Setting Up `.env`
+
+1. Copy the example file:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Open `.env` and update every path to match your system:
+   ```dotenv
+   # Linux / macOS example
+   NAND2TETRIS_PROJECTS_DIR=/home/yourname/nand2tetris/projects
+   ASM_INPUT_PATH=/home/yourname/nand2tetris/projects/06/max/Max.asm
+   VM_INPUT_PATH=/home/yourname/nand2tetris/projects/08/FunctionCalls/StaticsTest/Class2.vm
+   COMP_INPUT_PATH=/home/yourname/nand2tetris/projects/10/ExpressionLessSquare/SquareGame.jack
+   COMP2_INPUT_PATH=/home/yourname/nand2tetris/projects/10/ExpressionLessSquare/SquareGame.jack
+   TEMP_PARSED_FILE=/home/yourname/nand2tetris/projects/sampleparsed.txt
+   TEMP_TOKEN_XML=/home/yourname/nand2tetris/projects/token.xml
+   TEMP_TTOKEN_XML=/home/yourname/nand2tetris/projects/ttoken.xml
+   TEMP_VM_CODE=/home/yourname/nand2tetris/projects/vm_code.vm
+   VM_BOOTSTRAP=False
+   ```
+
+3. Add `.env` to `.gitignore` to keep your local paths out of version control:
+   ```bash
+   echo ".env" >> .gitignore
+   ```
+
+> **Note:** Until the scripts are updated to read from `.env` via `python-dotenv`, you still need to manually update the `path` variable inside each script's `if __name__ == "__main__":` block. The `.env` file serves as the authoritative reference for what all the paths should be.
 
 ---
 
 ## 🚀 How to Run
-
-> **Note:** The scripts currently have hardcoded Windows paths (e.g., `D:/nand2tetris/...`).  
-> To use them on Linux/macOS, update the `path` variable inside each script's `if __name__ == "__main__":` block to point to your local `.asm`, `.vm`, or `.jack` file.
 
 ---
 

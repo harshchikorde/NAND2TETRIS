@@ -1,0 +1,5 @@
+# Runtime dependencies
+colorama>=0.4.6     # Coloured terminal output used by comp2.py
+
+# Environment variable loading
+python-dotenv>=1.0.0  # Loads variables from .env file into os.environ
